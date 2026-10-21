@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Estrutura de Manutenção – SoftDesk</title>
+<style>
+  @page { size: 1280px 720px; margin: 0; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #e9ecef;
+    color: #1f2937;
+  }
+  .slide {
+    width: 1280px; height: 720px;
+    background: #ffffff;
+    margin: 20px auto;
+    padding: 35px 45px;
+    page-break-after: always;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    display: flex; flex-direction: column;
+    justify-content: flex-start; 
+    overflow: hidden; 
+  }
+  .slide h2 {
+    font-size: 26px; margin: 0 0 15px 0; color: #0f4c81;
+    border-bottom: 3px solid #0f4c81; padding-bottom: 8px;
+  }
+  
+  /* Capa */
+  .cover {
+    justify-content: center; align-items: center; text-align: center;
+    background: linear-gradient(135deg, #0f4c81 0%, #1e7bb8 100%);
+    color: #fff;
+  }
+  .cover h1 { color: #fff; font-size: 56px; margin: 0 0 6px 0;}
+  .cover .sub { color: #dbeafe; font-size: 24px; margin-top: 12px; }
+  .cover .foot { position: absolute; bottom: 40px; font-size: 16px; color: #cbd5e1; }
+  
+  /* Tabelas */
+  table {
+    width: 100%; border-collapse: collapse; font-size: 15px;
+    margin-bottom: 15px; table-layout: fixed;
+  }
+  th {
+    background: #0f4c81; color: #fff; text-align: center;
+    padding: 8px 10px; font-size: 14px; text-transform: uppercase;
+    letter-spacing: .5px; border: 1px solid #0f4c81;
+  }
+  td {
+    padding: 6px 10px; border: 1px solid #e5e7eb;
+    text-align: center; vertical-align: middle;
+    word-wrap: break-word;
+  }
+  
+  /* Proporções das colunas */
+  th:first-child, td:first-child { width: 60%; }
+  th:last-child, td:last-child { width: 40%; }
+
+  tr:nth-child(even) td { background: #f8fafc; }
+  
+  /* Cores de vínculo */
+  .pcm      { background:#d1fae5 !important; color:#065f46; font-weight:600; }
+  .regional { background:#fef3c7 !important; color:#92400e; font-weight:600; }
+  .prest    { background:#dbeafe !important; color:#1e40af; font-weight:600; }
+  
+  /* Layout lado a lado */
+  .layout-duplo { display: flex; gap: 25px; width: 100%; }
+  .coluna { flex: 1; display: flex; flex-direction: column; }
+  
+  /* Subtítulo das tabelas */
+  .sub-titulo { 
+    font-size: 18px; color: #0f4c81; font-weight: 600; 
+    margin: 10px 0 5px 0; border-bottom: 2px solid #cbd5e1; padding-bottom: 4px;
+  }
+
+  /* KPIs */
+  .kpi { display:flex; gap:24px; margin-bottom: 30px; width: 100%; }
+  .kpi .card { flex:1; background:#f1f5f9; border-left:6px solid #0f4c81; padding:24px; border-radius:6px; text-align:center; }
+  .kpi .card .n { font-size:48px; font-weight:700; color:#0f4c81; }
+  .kpi .card .l { font-size:16px; color:#475569; margin-top:8px; }
+  
+  .two-col { display:flex; gap:30px; width: 100%; margin-top: 30px; }
+  .two-col .box { flex:1; background:#f8fafc; padding:24px; border-radius:8px; border: 1px solid #e2e8f0; }
+  .box h3 { font-size:20px; color:#0f4c81; margin:0 0 15px 0; border-bottom:2px solid #cbd5e1; padding-bottom:5px; }
+  ul { margin:0; padding-left:20px; }
+  li { margin-bottom:10px; font-size:16px; line-height:1.4; }
+  
+  .num { position:absolute; bottom: 16px; right: 30px; font-size: 14px; color:#9ca3af; }
+  
+  @media print {
+    body { background:#fff; }
+    .slide { box-shadow:none; margin:0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1 – CAPA -->
+<div class="slide cover">
+  <h1>Estrutura de Manutenção</h1>
+  <p class="sub">SoftDesk — Catálogo de Manutenção</p>
+  <p class="sub" style="font-size:20px;margin-top:8px;">Serviço × Atribuições × Responsável</p>
+  <div class="foot">Versão 1.0</div>
+</div>
+
+<!-- SLIDE 2 – VISÃO GERAL -->
+<div class="slide">
+  <h2>Visão Geral do Catálogo</h2>
+  <div class="kpi">
+    <div class="card"><div class="n">23</div><div class="l">Macrogrupos de Serviço</div></div>
+    <div class="card"><div class="n">160</div><div class="l">Assuntos Corretivos</div></div>
+    <div class="card"><div class="n">38</div><div class="l">Assuntos Preventivos</div></div>
+  </div>
+  
+  <div class="two-col">
+    <div class="box">
+      <h3>Legenda</h3>
+      <ul style="list-style:none; padding:0; margin-top:15px;">
+        <li style="margin-bottom:15px;"><span style="display:inline-block;width:18px;height:18px;background:#d1fae5;border:1px solid #065f46;margin-right:10px;vertical-align:middle;"></span> <b>PCM</b></li>
+        <li style="margin-bottom:15px;"><span style="display:inline-block;width:18px;height:18px;background:#fef3c7;border:1px solid #92400e;margin-right:10px;vertical-align:middle;"></span> <b>Regional</b></li>
+        <li><span style="display:inline-block;width:18px;height:18px;background:#dbeafe;border:1px solid #1e40af;margin-right:10px;vertical-align:middle;"></span> <b>Prestadores</b> (Regiões e Fornecedores)</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Sobre o Catálogo</h3>
+      <ul>
+        <li>O catálogo abrange desde manutenções prediais, elétricas e climatização, até equipamentos específicos (padaria, açougue, depósito) e segurança do trabalho.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="num">2</div>
+</div>
+
+<!-- SLIDE 3 – AMBIENTAL, CARRINHOS E COMUNICAÇÃO VISUAL -->
+<div class="slide">
+  <h2>Ambiental, Carrinhos e Comunicação Visual</h2>
+  <div class="layout-duplo">
+    <div class="coluna">
+      <div class="sub-titulo">Ambiental</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Problema na coleta de lixo</td><td class="pcm">PCM Setor Ambiental</td></tr>
+      </table>
+      <div class="sub-titulo">Carrinhos</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Coleta de carrinhos</td><td class="pcm">Amanda PCM</td></tr>
+        <tr><td>Pequenos reparos de carrinhos</td><td class="prest">RDL</td></tr>
+        <tr><td>Reforma de carrinhos de compras</td><td class="prest">RDL</td></tr>
+      </table>
+    </div>
+    <div class="coluna">
+      <div class="sub-titulo">Comunicação Visual</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Backlight, Estrutura placa, Logo</td><td class="regional">Regional</td></tr>
+        <tr><td>Lona, Painel, Placas</td><td class="regional">Regional</td></tr>
+        <tr><td>Totem entrada / saída</td><td class="regional">Regional</td></tr>
+        <tr><td>Totem logo estacionamento</td><td class="regional">Regional</td></tr>
+        <tr><td>Triedo</td><td class="regional">Regional</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="num">3</div>
+</div>
+
+<!-- SLIDE 4 – CLIMATIZAÇÃO E GÁS -->
+<div class="slide">
+  <h2>Climatização e Gás</h2>
+  <div class="layout-duplo">
+    <div class="coluna">
+      <div class="sub-titulo">Climatização</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Aquecedor</td><td class="prest">Região Climatização</td></tr>
+        <tr><td>Ar condicionado central</td><td class="prest">Região Climatização</td></tr>
+        <tr><td>Cortina de ar</td><td class="prest">Região Climatização</td></tr>
+        <tr><td>Duto</td><td class="prest">Região Climatização</td></tr>
+        <tr><td>Split</td><td class="prest">Região Climatização</td></tr>
+        <tr><td>Ventilador</td><td class="prest">Região Climatização</td></tr>
+      </table>
+    </div>
+    <div class="coluna">
+      <div class="sub-titulo">Gás</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Mangueira</td><td class="regional">Regional</td></tr>
+        <tr><td>Medidor</td><td class="regional">Regional</td></tr>
+        <tr><td>Registro</td><td class="regional">Regional</td></tr>
+        <tr><td>Válvula</td><td class="regional">Regional</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="num">4</div>
+</div>
+
+<!-- SLIDE 5 – ELÉTRICA -->
+<div class="slide">
+  <h2>Elétrica</h2>
+  <table>
+    <tr><th>Atribuição</th><th>Responsável</th></tr>
+    <tr><td>Aterramento</td><td class="prest">Região Elétrica</td></tr>
+    <tr><td>Bateria</td><td class="prest">Região Elétrica</td></tr>
+    <tr><td>Disjuntor</td><td class="prest">Região Elétrica</td></tr>
+    <tr><td>Exaustor</td><td class="prest">Região Elétrica</td></tr>
+    <tr><td>Fiação</td><td class="prest">Região Elétrica</td></tr>
+    <tr><td>Gerador de energia</td><td class="prest">Região Elétrica</td></tr>
+    <tr><td>Gestal</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Iluminação</td><td class="prest">Região Elétrica</td></tr>
+    <tr><td>Interruptor</td><td class="prest">Região Elétrica</td></tr>
+    <tr><td>Nobreak</td><td class="prest">Região Elétrica</td></tr>
+    <tr><td>Pára-raio</td><td class="prest">Região Elétrica</td></tr>
+    <tr><td>Quadro de força</td><td class="prest">Região Elétrica</td></tr>
+    <tr><td>Secador de mão</td><td class="prest">Região Elétrica</td></tr>
+    <tr><td>Som Ambiente</td><td class="prest">Região Elétrica</td></tr>
+    <tr><td>Subestação</td><td class="prest">Região Elétrica</td></tr>
+    <tr><td>Tomada</td><td class="prest">Região Elétrica</td></tr>
+    <tr><td>Torneira Elétrica</td><td class="prest">Região Elétrica</td></tr>
+  </table>
+  <div class="num">5</div>
+</div>
+
+<!-- SLIDE 6 – EQUIP. ÁREA DE VENDAS E DEPÓSITO -->
+<div class="slide">
+  <h2>Equipamentos: Vendas e Depósito</h2>
+  <div class="layout-duplo">
+    <div class="coluna">
+      <div class="sub-titulo">Área de Vendas</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Bip</td><td class="prest">Rolomatic</td></tr>
+        <tr><td>Busca preço</td><td class="regional">Regional</td></tr>
+        <tr><td>Check Out</td><td class="regional">Regional</td></tr>
+        <tr><td>Esteira</td><td class="prest">Airton</td></tr>
+        <tr><td>Lixeira</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Máquina de Piso</td><td class="prest">Teclean</td></tr>
+        <tr><td>Microfone</td><td class="prest">Região Elétrica</td></tr>
+        <tr><td>Suporte</td><td class="prest">Região Predial</td></tr>
+      </table>
+    </div>
+    <div class="coluna">
+      <div class="sub-titulo">Depósito</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Embaladora do Hortifruti</td><td class="regional">Regional</td></tr>
+        <tr><td>Embaladora Manual</td><td class="regional">Regional</td></tr>
+        <tr><td>Escadas de reposição</td><td class="regional">Regional</td></tr>
+        <tr><td>Rampa Niveladora</td><td class="prest">Região Serralheria</td></tr>
+        <tr><td>Sorter</td><td class="prest">Técnicos CD</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="num">6</div>
+</div>
+
+<!-- SLIDE 7 – EMPILHADEIRAS E AÇOUGUE -->
+<div class="slide">
+  <h2>Empilhadeiras e Equipamentos do Açougue</h2>
+  <div class="layout-duplo">
+    <div class="coluna">
+      <div class="sub-titulo">Empilhadeiras e Paleteiras</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Empilhadeira / Modelos</td><td class="prest">EMPITEC/HELI/SAS/TRANSPOTECH</td></tr>
+        <tr><td>Paleteira manual</td><td class="prest">Cristiano</td></tr>
+      </table>
+    </div>
+    <div class="coluna">
+      <div class="sub-titulo">Açougue</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Batedor de Bife</td><td class="regional">Regional</td></tr>
+        <tr><td>Cuba</td><td class="regional">Regional</td></tr>
+        <tr><td>Embaladora Automática</td><td class="prest">Tiago</td></tr>
+        <tr><td>Esterilizador de facas</td><td class="regional">Regional</td></tr>
+        <tr><td>Fatiador de Bifes</td><td class="regional">Regional</td></tr>
+        <tr><td>Moedor</td><td class="regional">Regional</td></tr>
+        <tr><td>Serra Fita</td><td class="regional">Regional</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="num">7</div>
+</div>
+
+<!-- SLIDE 8 – PADARIA -->
+<div class="slide">
+  <h2>Equipamentos da Padaria</h2>
+  <div class="layout-duplo">
+    <div class="coluna">
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Amassadeira</td><td class="prest">Mantec</td></tr>
+        <tr><td>Batedeira</td><td class="prest">Mantec</td></tr>
+        <tr><td>Balcão</td><td class="prest">Mantec</td></tr>
+        <tr><td>Boleadora</td><td class="prest">Mantec</td></tr>
+        <tr><td>Carrinho esqueleto padaria</td><td class="prest">Mantec</td></tr>
+        <tr><td>Cilindro</td><td class="prest">Mantec</td></tr>
+        <tr><td>Climática</td><td class="prest">Mantec</td></tr>
+        <tr><td>Coifa</td><td class="prest">Mantec</td></tr>
+        <tr><td>Divisora de Pães</td><td class="prest">Mantec</td></tr>
+        <tr><td>Estufa</td><td class="prest">Mantec</td></tr>
+        <tr><td>Fatiador de bolos</td><td class="prest">Mantec</td></tr>
+        <tr><td>Fatiador de Pão</td><td class="prest">Mantec</td></tr>
+        <tr><td>Fitilhadora</td><td class="prest">Mantec</td></tr>
+      </table>
+    </div>
+    <div class="coluna">
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Forno</td><td class="prest">Mantec</td></tr>
+        <tr><td>Fritadeira</td><td class="prest">Mantec</td></tr>
+        <tr><td>Geladeira dosadora</td><td class="prest">Mantec</td></tr>
+        <tr><td>Grupo automático</td><td class="prest">Mantec</td></tr>
+        <tr><td>Liquidificador</td><td class="prest">Mantec</td></tr>
+        <tr><td>Máquina de lavar formas</td><td class="prest">Mantec</td></tr>
+        <tr><td>Mexirola</td><td class="prest">Mantec</td></tr>
+        <tr><td>Modeladora</td><td class="prest">Mantec</td></tr>
+        <tr><td>Moinho</td><td class="prest">Mantec</td></tr>
+        <tr><td>Panquequeira</td><td class="prest">Mantec</td></tr>
+        <tr><td>Tanque de imersão</td><td class="prest">Mantec</td></tr>
+        <tr><td>Ultracongelador</td><td class="prest">Mantec</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="num">8</div>
+</div>
+
+<!-- SLIDE 9 – GESTAL -->
+<div class="slide">
+  <h2>Gestal</h2>
+  <table>
+    <tr><th>Atribuição</th><th>Responsável</th></tr>
+    <tr><td>Alarme de incêndio</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Antecâmara</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Câmara de carnes</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Câmara de congelados</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Câmara de resfriados</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Degelo</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Gerador</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Novas câmeras</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Porta de câmara congelados</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Porta de câmara de carnes</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Porta de câmara resfriados</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Rack de congelados</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Rack de resfriados</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Rack de sorvetes</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Reposicionamento de câmeras</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Temperatura do glicol</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Luzes</td><td class="pcm">Anne (PCM)</td></tr>
+    <tr><td>Gate X</td><td class="pcm">Anne (PCM)</td></tr>
+  </table>
+  <div class="num">9</div>
+</div>
+
+<!-- SLIDE 10 – HIDRÁULICA -->
+<div class="slide">
+  <h2>Hidráulica</h2>
+  <div class="layout-duplo">
+    <div class="coluna">
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Bebedouro</td><td class="prest">Frota Bebedouros</td></tr>
+        <tr><td>Boiler</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Bomba</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Caixa de gordura</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Cisterna</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Conexão</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Drenagem</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Encanamento e tubulação</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Estação de tratamento de esgoto</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Fossa</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Lavatório</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Pia</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Ralo</td><td class="prest">Região Predial</td></tr>
+      </table>
+    </div>
+    <div class="coluna">
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Registro</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Reservatório</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Sanitário</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Torneira</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Válvula</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Caminhão limpa fossa</td><td class="regional">Regional</td></tr>
+        <tr><td>Análise de ETE</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Bomba de Esgoto (Acomp. Amb.)</td><td class="pcm">Amanda PCM</td></tr>
+        <tr><td>Plano de melhoria – Ambiental</td><td class="pcm">Amanda PCM</td></tr>
+        <tr><td>Elevatória (Acomp. Amb.)</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Verificação do clorador (Acomp. Amb.)</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Conexão Rede Pública (Acomp. Amb.)</td><td class="pcm">Amanda PCM</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="num">10</div>
+</div>
+
+<!-- SLIDE 11 – JARDINAGEM, MOBILIÁRIO E PORTA PALETES -->
+<div class="slide">
+  <h2>Jardinagem, Mobiliário e Porta Paletes</h2>
+  <div class="layout-duplo">
+    <div class="coluna">
+      <div class="sub-titulo">Jardinagem</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Corte, Dedetização, Limpeza</td><td class="prest">Reg. Predial / Israel / Jasmim</td></tr>
+      </table>
+      <div class="sub-titulo">Mobiliário</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Apoio de pé, Cadeira</td><td class="prest">Renoflex</td></tr>
+        <tr><td>Armário, Gaveta, Gôndola, Mesa</td><td class="prest">Planejados Tijucas</td></tr>
+        <tr><td>Cortina PVC, Painel de chaves</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Fogão</td><td class="regional">Regional</td></tr>
+      </table>
+    </div>
+    <div class="coluna">
+      <div class="sub-titulo">Porta Paletes</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Fixações, Gatilhos de segurança</td><td class="prest" rowspan="4">GS Porta Paletes</td></tr>
+        <tr><td>Longarina, Mike Tyson, Montante</td></tr>
+        <tr><td>Proteção coluna / lateral / montante</td></tr>
+        <tr><td>Travessa dos montantes laterais</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="num">11</div>
+</div>
+
+<!-- SLIDE 12 – PREDIAL -->
+<div class="slide">
+  <h2>Predial</h2>
+  <div class="layout-duplo">
+    <div class="coluna">
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Cantoneira</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Divisória</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Escadas</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Esquadria</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Fechadura</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Forro</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Impermeabilização</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Muro</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Parede</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Pintura</td><td class="prest">Região Predial</td></tr>
+      </table>
+    </div>
+    <div class="coluna">
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Piso</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Porta</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Porta automática</td><td class="regional">Regional</td></tr>
+        <tr><td>Poste</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Tela</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Teto</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Vedação</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Contentores</td><td class="prest">Região Predial</td></tr>
+        <tr><td>Fixações</td><td class="prest">Região Predial</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="num">12</div>
+</div>
+
+<!-- SLIDE 13 – REFRIGERAÇÃO, SEGURANÇA E TELHADO -->
+<div class="slide">
+  <h2>Refrigeração, Segurança do Trabalho e Telhado</h2>
+  <div class="layout-duplo">
+    <div class="coluna">
+      <div class="sub-titulo">Refrigeração</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Câmara congelados</td><td class="prest">Região Refrigeração</td></tr>
+        <tr><td>Câmara resfriados</td><td class="prest">Região Refrigeração</td></tr>
+        <tr><td>Expositor congelados</td><td class="prest">Região Refrigeração</td></tr>
+        <tr><td>Expositor Refrigerado</td><td class="prest">Região Refrigeração</td></tr>
+        <tr><td>Freezer</td><td class="prest">Região Refrigeração</td></tr>
+        <tr><td>Geladeira</td><td class="prest">Região Refrigeração</td></tr>
+        <tr><td>Ilha self</td><td class="prest">Região Refrigeração</td></tr>
+        <tr><td>Porta câmara</td><td class="prest">Região Serralheria</td></tr>
+      </table>
+      <div class="sub-titulo">Telhado</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Calha, Laje, Telhado, Claraboia</td><td class="prest">Alemão Calhas Sul/Norte</td></tr>
+      </table>
+    </div>
+    <div class="coluna">
+      <div class="sub-titulo">Refrigeração (Continuação)</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Rack de congelados</td><td class="prest">Região Refrigeração</td></tr>
+        <tr><td>Rack de resfriados</td><td class="prest">Região Refrigeração</td></tr>
+        <tr><td>Regulagem de temperatura</td><td class="prest">Região Refrigeração</td></tr>
+        <tr><td>Sala de preparo</td><td class="prest">Região Refrigeração</td></tr>
+        <tr><td>UC congelados</td><td class="prest">Região Refrigeração</td></tr>
+        <tr><td>UC resfriados</td><td class="prest">Região Refrigeração</td></tr>
+      </table>
+      <div class="sub-titulo">Segurança do Trabalho</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Alarme de incêndio</td><td class="regional">Regional</td></tr>
+        <tr><td>Iluminação de emergência</td><td class="regional">Regional</td></tr>
+        <tr><td>Saídas de emergências</td><td class="regional">Regional</td></tr>
+        <tr><td>Sinalização de abandono</td><td class="regional">Regional</td></tr>
+        <tr><td>Sistema de bombas</td><td class="regional">Regional</td></tr>
+        <tr><td>Sistema de extintores</td><td class="regional">Regional</td></tr>
+        <tr><td>Sistema hidráulico preventivo</td><td class="regional">Regional</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="num">13</div>
+</div>
+
+<!-- SLIDE 14 – VIDRAÇARIA, VISTORIAS E METALÚRGICA -->
+<div class="slide">
+  <h2>Vidraçaria, Vistorias e Metalúrgica</h2>
+  <div class="layout-duplo">
+    <div class="coluna">
+      <div class="sub-titulo">Vidraçaria</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Acrílico, Espelho, Janela</td><td class="prest" rowspan="2">Rodrigo Vidros</td></tr>
+        <tr><td>Vidros, Mola da porta</td></tr>
+      </table>
+      <div class="sub-titulo">Vistorias</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Lojas</td><td class="regional">Regional</td></tr>
+        <tr><td>Veículos</td><td class="pcm">Matheus PCM</td></tr>
+      </table>
+    </div>
+    <div class="coluna">
+      <div class="sub-titulo">Metalúrgica</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Bate carrinho, Corrimão, Guarda corpo</td><td class="prest" rowspan="3">Região Serralheria</td></tr>
+        <tr><td>Portão, Serralheria, Solda</td></tr>
+        <tr><td>Longarina</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="num">14</div>
+</div>
+
+<!-- ========================================== -->
+<!-- PARTE 2: PREVENTIVAS                       -->
+<!-- ========================================== -->
+
+<!-- SLIDE 15 – DIVISOR PREVENTIVAS -->
+<div class="slide cover">
+  <h1>Preventivas</h1>
+  <p class="sub">Catálogo de Manutenções Preventivas por Loja</p>
+</div>
+
+<!-- SLIDE 16 – PREVENTIVAS: ELÉTRICA E CLIMATIZAÇÃO -->
+<div class="slide">
+  <h2>Preventivas: Elétrica, Climatização e Gerador</h2>
+  <div class="layout-duplo">
+    <div class="coluna">
+      <div class="sub-titulo">Climatização</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Preventiva Ar Cond</td><td class="prest">Equipe Climatização</td></tr>
+        <tr><td>Preventiva Casa de Máquinas</td><td class="prest">Equipe Climatização</td></tr>
+        <tr><td>Preventiva Condensadores / Externos</td><td class="prest">Equipe Climatização</td></tr>
+      </table>
+      <div class="sub-titulo">Gerador</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Preventiva Gerador</td><td class="prest">Equipe Geradores</td></tr>
+      </table>
+    </div>
+    <div class="coluna">
+      <div class="sub-titulo">Elétrica</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Preventiva Elétrica</td><td class="prest">Equipe Elétrica</td></tr>
+        <tr><td>Preventiva Nobreak</td><td class="prest">Rudinei Nobreaks</td></tr>
+        <tr><td>Preventiva Subestação</td><td class="pcm">Matheus PCM</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="num">16</div>
+</div>
+
+<!-- SLIDE 17 – PREVENTIVAS: EQUIPAMENTOS E DEPÓSITO -->
+<div class="slide">
+  <h2>Preventivas: Equipamentos e Depósito</h2>
+  <div class="layout-duplo">
+    <div class="coluna">
+      <div class="sub-titulo">Padaria</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Limpeza Coifa CP 800</td><td class="prest">Mantec</td></tr>
+        <tr><td>Fornos da Padaria CP 800</td><td class="prest">Mantec</td></tr>
+      </table>
+      <div class="sub-titulo">Açougue</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Preventiva Embaladora</td><td class="prest">Tiago Embaladoras</td></tr>
+      </table>
+    </div>
+    <div class="coluna">
+      <div class="sub-titulo">Depósito</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Limpeza Rampa Niveladora</td><td class="prest">Equipe Predial</td></tr>
+        <tr><td>Rampas Niveladoras CD</td><td class="prest">Equipe CD</td></tr>
+        <tr><td>Portas de Docas CD</td><td class="prest">Equipe CD</td></tr>
+        <tr><td>Sorter</td><td class="prest">Equipe CD</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="num">17</div>
+</div>
+
+<!-- SLIDE 18 – PREVENTIVAS: HIDRÁULICA -->
+<div class="slide">
+  <h2>Preventivas: Hidráulica</h2>
+  <table>
+    <tr><th>Atribuição</th><th>Responsável</th></tr>
+    <tr><td>Análise de ETE</td><td class="prest">Equipe Predial</td></tr>
+    <tr><td>Preventiva Bebedouros</td><td class="prest">Frota Bebedouros</td></tr>
+    <tr><td>Preventiva Bombas Água Potável</td><td class="prest">Equipe CD</td></tr>
+    <tr><td>Preventiva Caixa de Gordura</td><td class="regional">Equipe Regional</td></tr>
+    <tr><td>Preventiva Clorador</td><td class="prest">Equipe Predial</td></tr>
+    <tr><td>Preventiva Hidráulica ADM 95</td><td class="prest">Equipe Predial</td></tr>
+    <tr><td>Vistoria Drenagem</td><td class="prest">Equipe Predial</td></tr>
+  </table>
+  <div class="num">18</div>
+</div>
+
+<!-- SLIDE 19 – PREVENTIVAS: JARDINAGEM, REFRIGERAÇÃO E OUTROS -->
+<div class="slide">
+  <h2>Preventivas: Jardinagem, Refrigeração e Outros</h2>
+  <div class="layout-duplo">
+    <div class="coluna">
+      <div class="sub-titulo">Jardinagem</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Preventiva Campo 95</td><td class="prest" rowspan="4">Equipe Jardim</td></tr>
+        <tr><td>Preventiva Jardim</td></tr>
+        <tr><td>Preventiva Jardim Pracinha 34</td></tr>
+        <tr><td>Preventiva Matos</td></tr>
+      </table>
+      <div class="sub-titulo">Predial e Porta Paletes</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Preventiva Demarcações</td><td class="prest">Equipe Predial</td></tr>
+        <tr><td>Preventiva Porta Paletes</td><td class="prest">SESMT</td></tr>
+      </table>
+    </div>
+    <div class="coluna">
+      <div class="sub-titulo">Refrigeração</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Análise de Óleo</td><td class="prest" rowspan="5">Equipe Refrigeração</td></tr>
+        <tr><td>Preventiva Balcão</td></tr>
+        <tr><td>Preventiva Ilha Self</td></tr>
+        <tr><td>Preventiva Refrigeração</td></tr>
+        <tr><td>Preventiva Vistoria Refrigeração</td></tr>
+      </table>
+      <div class="sub-titulo">Gestal e Telhado</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Preventiva Temperatura Externa / Boteiras</td><td class="prest">Tijueletro</td></tr>
+        <tr><td>Preventiva Telhado</td><td class="prest">Equipe Telhado</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="num">19</div>
+</div>
+
+<!-- SLIDE 20 – PREVENTIVAS: VISTORIAS E SEGURANÇA -->
+<div class="slide">
+  <h2>Preventivas: Vistorias e Segurança do Trabalho</h2>
+  <div class="layout-duplo">
+    <div class="coluna">
+      <div class="sub-titulo">Vistorias</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Vistoria Loja</td><td class="regional">Equipe Regional</td></tr>
+        <tr><td>Vistoria Veículos</td><td class="pcm">Matheus PCM</td></tr>
+      </table>
+    </div>
+    <div class="coluna">
+      <div class="sub-titulo">Segurança do Trabalho</div>
+      <table>
+        <tr><th>Atribuição</th><th>Responsável</th></tr>
+        <tr><td>Vistoria Bombas de Incêndio</td><td class="regional">Equipe Regional</td></tr>
+        <tr><td>Vistoria Alarme de Incêndio</td><td class="prest">NSC Extras</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="num">20</div>
+</div>
+
+<!-- SLIDE 21 – RESUMO FINAL -->
+<div class="slide">
+  <h2>Resumo do Catálogo</h2>
+  <div class="kpi">
+    <div class="card"><div class="n">23</div><div class="l">Macrogrupos de Serviço</div></div>
+    <div class="card"><div class="n">160</div><div class="l">Assuntos Corretivos</div></div>
+    <div class="card"><div class="n">38</div><div class="l">Assuntos Preventivos</div></div>
+  </div>
+  <div class="two-col" style="margin-top: 40px;">
+    <div class="box" style="text-align: center; padding: 40px;">
+      <h3>Corretivas</h3>
+      <p style="font-size: 18px; color: #475569;">Mapeamento completo de todos os problemas operacionais e suas respectivas frentes de atendimento.</p>
+    </div>
+    <div class="box" style="text-align: center; padding: 40px;">
+      <h3>Preventivas</h3>
+      <p style="font-size: 18px; color: #475569;">Rotina programada por loja para garantir a integridade dos ativos e a continuidade das operações.</p>
+    </div>
+  </div>
+  <div class="num">21</div>
+</div>
+
+</body>
+</html>
